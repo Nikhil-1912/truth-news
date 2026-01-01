@@ -1,50 +1,69 @@
-<main>
-  <header className="site-header">
-    <div className="site-title">Truth</div>
-    <div className="site-tagline">Verified Indian News</div>
-  </header>
-
-  {/* News list goes here */}
-</main>
-
-import { fetchNews } from "@/lib/fetchNews";
-
-export const revalidate = 300; // refresh every 5 minutes
-
-export default async function HomePage() {
-  const news = await fetchNews();
-
+export default function HomePage() {
   return (
-    <main style={{ maxWidth: "800px", margin: "auto", padding: "20px" }}>
-      <h1>Truth</h1>
-      <p>Verified Indian News</p>
+    <main className="container">
 
-      <section className="news-grid">
-  {news.map((item, index) => (
-    <article className="news-card" key={index}>
-      <img
-        className="news-image"
-        src="/news-placeholder.jpg"
-        alt="News"
-      />
-
-      <div className="news-content">
-        <h2 className="news-title">
-          <a href={item.link} target="_blank" rel="noopener noreferrer">
-            {item.title}
-          </a>
-        </h2>
-
-        <div className="news-meta">
-          {item.source} ·{" "}
-          {new Date(item.date).toDateString()}
+      {/* TOP NAV */}
+      <nav className="top-nav">
+        <div className="nav-left">
+          <span className="logo">Truth</span>
+          <span className="date">
+            {new Date().toDateString()}
+          </span>
         </div>
-      </div>
-    </article>
-  ))}
-</section>
 
-      
+        <div className="nav-links">
+          <a>India</a>
+          <a>Politics</a>
+          <a>Defence</a>
+          <a>Business</a>
+          <a>World</a>
+          <a>Opinion</a>
+        </div>
+      </nav>
+
+      {/* MAIN LEAD STORY */}
+      <section className="lead-story">
+        <div className="lead-text">
+          <h1>
+            Dozens feared dead, around 100 injured in Switzerland ski resort explosion
+          </h1>
+          <p>
+            The blast took place at 01:30 local time. Authorities rule out terror attack.
+          </p>
+          <span className="meta">
+            World · Indian Express
+          </span>
+        </div>
+
+        <img
+          src="/news-placeholder.jpg"
+          alt="Lead news"
+          className="lead-image"
+        />
+      </section>
+
+      {/* GRID STORIES */}
+      <section className="news-grid">
+        <div className="grid-left">
+          <h3>SIT’s big revelation in Sabarimala scandal</h3>
+          <img src="/news-placeholder.jpg" />
+          <p>Gold missing from more temple artefacts</p>
+        </div>
+
+        <div className="grid-middle">
+          <ul>
+            <li>Madras HC allows stupa for 1755 war heroes</li>
+            <li>Nagpur neurosurgeon dies of heart attack</li>
+            <li>Behind gig workers’ New Year strike</li>
+          </ul>
+        </div>
+
+        <div className="grid-right">
+          <h4>Advertisement</h4>
+          <div className="ad-box">AD SPACE</div>
+        </div>
+      </section>
+
     </main>
   );
 }

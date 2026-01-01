@@ -1,3 +1,12 @@
+<main>
+  <header className="site-header">
+    <div className="site-title">Truth</div>
+    <div className="site-tagline">Verified Indian News</div>
+  </header>
+
+  {/* News list goes here */}
+</main>
+
 import { fetchNews } from "@/lib/fetchNews";
 
 export const revalidate = 300; // refresh every 5 minutes
@@ -10,18 +19,32 @@ export default async function HomePage() {
       <h1>Truth</h1>
       <p>Verified Indian News</p>
 
-      {news.map((item, index) => (
-        <article key={index} style={{ marginBottom: "20px" }}>
-          <h2>
-            <a href={item.link} target="_blank" rel="noopener noreferrer">
-              {item.title}
-            </a>
-          </h2>
-          <p>
-            {item.source} · {new Date(item.date).toDateString()}
-          </p>
-        </article>
-      ))}
+      <section className="news-grid">
+  {news.map((item, index) => (
+    <article className="news-card" key={index}>
+      <img
+        className="news-image"
+        src="/news-placeholder.jpg"
+        alt="News"
+      />
+
+      <div className="news-content">
+        <h2 className="news-title">
+          <a href={item.link} target="_blank" rel="noopener noreferrer">
+            {item.title}
+          </a>
+        </h2>
+
+        <div className="news-meta">
+          {item.source} ·{" "}
+          {new Date(item.date).toDateString()}
+        </div>
+      </div>
+    </article>
+  ))}
+</section>
+
+      
     </main>
   );
 }
